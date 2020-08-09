@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include <stdlib.h>
+void main(){
+    int n;
+    printf("Enter the order of Square:(must be odd) ");
+    scanf("%d",&n);
+    if(n%2==0)
+	exit(0);
+    int square[n][n];
+    magic_square(n,square);
+    print_matrix(n,square);
+}
+
+void magic_square(int n,int a[n][n]){
+    int next=1,i=0,j=n/2;
+    a[i][j]=next;
+    while(next<=n*n){
+        next++;
+        if(i==0 && j==0){
+            i=1;j=0;
+            a[i][j]=next;
+        }
+        else if(i==0){
+            i=n-1;j-=1;
+            a[i][j]=next;
+        }
+        else if(j==0){
+            i-=1;j=n-1;
+            a[i][j]=next;
+        }
+        else{
+            if(next%n==1){
+                i+=1;
+                a[i][j]=next;
+            }
+            else{
+                i-=1;j-=1;
+                a[i][j]=next;
+            }
+        }
+    }
+}
+
+void print_matrix(int n,int a[n][n]){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            printf("%3d ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
